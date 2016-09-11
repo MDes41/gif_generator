@@ -2,7 +2,18 @@ Rails.application.routes.draw do
 
   root "users#index"
 
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+
   resources :users, only: [:new, :create, :show]
+
+  namespace :admin do
+    resources :categories, only: [:index, :new, :create, :show]
+    # resources :gifs, only: [:new, :create]
+  end
+
+  # resources :gifs, only: [:show]
+  # resources :categories, only: [:index, :show]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
