@@ -1,4 +1,4 @@
-<h1>Welcome to the Admin Categories Page</h1>
+<h1>Admin Categories Page</h1>
 
 <h3><%= link_to "Create A New Category", new_admin_category_path %></h3>
 
@@ -7,7 +7,8 @@
 <ul>
   <% @categories.each do |category| %>
     <li>
-      <%= link_to category.name, category %>
+      <%= link_to category.name, admin_category_path(category) %> -
+      <%= link_to "Delete", admin_category_path(category), method: :delete %>
     </li>
   <% end %>
 </ul>

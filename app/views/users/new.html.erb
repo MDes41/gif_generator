@@ -1,5 +1,7 @@
 <h1>Create New User</h1>
 
+<%= render partial: 'shared/errors', locals: { target: @user } %>
+
 <%= form_for @user do |f| %>
   <%= f.text_field :name, placeholder: "First Name" %>
   <%= f.text_field :username, placeholder: "Username" %>

@@ -12,11 +12,19 @@ class Admin::CategoriesController < Admin::BaseController
     @category = Category.new(category_params)
     if @category.save
       redirect_to admin_category_path(@category)
+    else
+      render :new
     end
   end
 
   def show
     @category = Category.find(params[:id])
+  end
+
+  def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+    redirect_to admin_categories_path
   end
 
   private

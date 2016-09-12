@@ -22,4 +22,8 @@ module TestHelpers
     admin_logs_in
   end
 
+  def create_category(name)
+    Category.create(name: name)
+  end
+
 end

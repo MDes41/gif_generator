@@ -1,1 +1,5 @@
 <h1>Gif's for <%= @category.name %></h1>
+<p>
+  <%= link_to "Delete Category", admin_category_path(@category), method: :delete %>
+</p>
+<h2><%= link_to "Generate Gif", admin_category_gifs_path(@category), method: :post  %></h2>
