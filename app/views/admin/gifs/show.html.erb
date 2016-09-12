@@ -1,3 +1,10 @@
-<h1>Showing Gif in Category: <%= @gif.category.name %></h1>
+<h1>Gif: <%= @gif.name %></h1>
+<h3><%= link_to "Delete", admin_category_gif_path(@gif.category, @gif), method: :delete %></h3>
+<p>
+  Link URL: <%= @gif.url_path %>
+</p>
+<p>
+  Bitly: <%= @gif.bitly %>
+</p>
 
-<img src="<%= generate_gif(@gif.url_path) %>" alt="<%= @gif.url_path %>" />
+<img src="<%= @gif.image %>" alt="<%= @gif.url_path %>" />

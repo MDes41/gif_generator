@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
   validates :role, presence: true
   validate :no_white_space
-
+  has_many :favorites
+  has_many :gifs, through: :favorites
+  
   enum role: %w(default admin)
 
   def no_white_space

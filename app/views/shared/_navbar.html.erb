@@ -1,0 +1,70 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    <a class="navbar-brand" href="<%= root_path %>">Home</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <% if current_user && current_admin? %>
+
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="<%= admin_categories_path %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li role="separator" class="divider"></li>
+                <li><a href="<%= admin_categories_path %>">All</a></li>
+                <li role="separator" class="divider"></li>
+              <% Category.all.each do |category| %>
+                <li><%= link_to "#{category.name}", admin_category_path(category) %></li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+
+      <% elsif current_user && !current_admin?%>
+
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="<%= categories_path %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li role="separator" class="divider"></li>
+                  <li><a href="<%= categories_path %>">All</a></li>
+                  <li role="separator" class="divider"></li>
+                <% Category.all.each do |category| %>
+                  <li><%= link_to "#{category.name}", category_path(category) %></li>
+                <% end %>
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="<%= user_favorites_path %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Favorites <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li role="separator" class="divider"></li>
+                  <li><a href="<%= user_favorites_path(current_user) %>">All</a></li>
+                  <li role="separator" class="divider"></li>
+                <% User.find(current_user.id).gifs.all.each do |gif| %>
+                  <li><%= link_to "#{gif.category.name}", user_category_path(gif.category) %></li>
+                <% end %>
+              </ul>
+            </li>
+
+        </ul>
+
+      <% end %>
+
+    </div><!-- /.navbar-collapse -->
+    <% if current_user && current_admin? %>
+      <h5>Welcome, <%= current_user.name %>! This is the Admin Portal. <%= link_to "Logout", logout_path, method: :delete %></h5>
+    <% elsif current_user %>
+      <h5>Welcome, <%= current_user.name %>! <%= link_to "Logout", logout_path, method: :delete %></h5>
+    <% end %>
+  </div><!-- /.container-fluid -->
+</nav>

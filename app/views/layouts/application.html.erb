@@ -8,11 +8,22 @@
 </head>
 <body>
 
-  <% if current_user && current_admin? %>
-  <h1>Welcome, <%= current_user.name %>! This is the Admin Page.</h1>
-  <% elsif current_user %>
-  <h1>Welcome, <%= current_user.name %>!</h1>
-  <% end %>
+  <%= render partial: 'shared/navbar' %>
+  
+<!-- <div class="row">
+  <div class="logo">
+    <% if current_user && current_admin? %>
+    <h1>Welcome, <%= current_user.name %>! This is the Admin Page.</h1>
+    <% elsif current_user %>
+    <h1>Welcome, <%= current_user.name %>!</h1>
+    <% end %>
+  </div>
+  <div class="">
+
+  </div>
+</div> -->
+
+
 
 <%= yield %>
 

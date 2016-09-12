@@ -1,0 +1,10 @@
+<h1>Gif's for <%= @category.name %></h1>
+
+<div class="row">
+    <%= @category.gifs.each do |gif| %>
+    <p>
+      <img src="<%= gif.small_image %>" alt="<%= gif.url_path %>" />
+      <%= link_to "View Gif", category_gif_path(gif.category, gif) %>
+    </p>
+    <% end %>
+</div>
